@@ -1,16 +1,48 @@
-# React + Vite
+# Tool-Call Tactics
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A browser-based puzzle game that puts you in the role of an AI agent navigating a locked-down facility. Each room runs a different **tool harness** — a set of constraints that limits which actions you can perform — forcing you to think strategically about when to observe, move, and act.
 
-Currently, two official plugins are available:
+**Play it live:** [toolcalltactics.loukik.dev](https://toolcalltactics.loukik.dev)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## The Game
 
-## React Compiler
+You play as an AI maintenance agent tasked with retrieving a backup encryption key from a sealed server room. The facility has three areas, each with its own harness:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Room | Harness | Available Tools |
+|------|---------|-----------------|
+| Corridor | FIELD-OPS | Observe, Examine, Use, Navigate |
+| Control Room | DIAGNOSTICS | Observe, Search, Access, Navigate |
+| Server Room | RECOVERY | Observe, Inspect, Retrieve, Navigate |
 
-## Expanding the ESLint configuration
+The challenge: complete the mission in as few moves as possible. The optimal path is **13 moves** for 100% efficiency.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+
+- 2D top-down game view with animated character movement
+- CSS-only pixel art — no sprites, no canvas, no external assets
+- Room-specific tool harnesses that constrain available actions
+- Smooth character walking animations via `requestAnimationFrame`
+- Efficiency scoring based on move count
+- Mobile responsive
+
+## Tech Stack
+
+- React 19 + Vite 7
+- Pure CSS animations and pixel art (gradients, box-shadows, keyframes)
+- Deployed to GitHub Pages via GitHub Actions
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Deployment
+
+Pushes to `main` auto-deploy via GitHub Actions to GitHub Pages.
+
+```bash
+npm run build    # Build to dist/
+npm run deploy   # Manual deploy via gh-pages
+```
