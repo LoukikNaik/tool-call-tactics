@@ -28,6 +28,7 @@ html, body, #root {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  overflow-x: hidden;
 }
 
 body {
@@ -1703,9 +1704,11 @@ body {
   }
 
   html, body, #root {
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     height: auto;
     min-height: 100%;
+    max-width: 100vw;
   }
 
   .game-screen {
@@ -1745,9 +1748,7 @@ body {
 /* Map scaling at narrower widths */
 @media (max-width: 720px) {
   .facility-map-wrapper {
-    transform: scale(0.85);
-    transform-origin: top center;
-    margin-bottom: -30px;
+    zoom: 0.85;
   }
 }
 
@@ -1756,6 +1757,8 @@ body {
   .app {
     padding: 4px;
     align-items: flex-start;
+    overflow: hidden;
+    max-width: 100vw;
   }
 
   .crt-container {
@@ -1823,14 +1826,13 @@ body {
 
   /* Map scaling for mobile */
   .facility-map-wrapper {
-    transform: scale(0.55);
-    transform-origin: top center;
-    margin-bottom: -100px;
+    zoom: 0.55;
   }
 
   /* Room panel */
   .room-panel {
     padding: 8px;
+    overflow: hidden;
   }
 
   .room-description {
@@ -1879,9 +1881,7 @@ body {
 /* Small phones */
 @media (max-width: 400px) {
   .facility-map-wrapper {
-    transform: scale(0.45);
-    transform-origin: top center;
-    margin-bottom: -120px;
+    zoom: 0.45;
   }
 
   .title-line { font-size: 12px; }
