@@ -1686,7 +1686,13 @@ body {
 .vlog-action { color: var(--accent); }
 
 /* ====== RESPONSIVE ====== */
+
+/* Tablet / small desktop */
 @media (max-width: 900px) {
+  .app {
+    padding: 8px;
+  }
+
   .crt-container {
     max-height: none;
     height: auto;
@@ -1695,6 +1701,8 @@ body {
 
   html, body, #root {
     overflow: auto;
+    height: auto;
+    min-height: 100%;
   }
 
   .game-screen {
@@ -1719,6 +1727,10 @@ body {
     max-height: none;
   }
 
+  .action-log {
+    max-height: 200px;
+  }
+
   .title-line { font-size: 20px; }
 
   .status-bar {
@@ -1727,16 +1739,171 @@ body {
   }
 }
 
+/* Map scaling at narrower widths */
+@media (max-width: 720px) {
+  .facility-map-wrapper {
+    zoom: 0.85;
+  }
+}
+
+/* Mobile */
 @media (max-width: 600px) {
-  .title-line { font-size: 16px; }
+  .app {
+    padding: 4px;
+    align-items: flex-start;
+  }
+
+  .crt-container {
+    border-radius: 4px;
+    border-width: 2px;
+  }
+
+  .title-line { font-size: 14px; }
+
+  .intro-content {
+    max-width: 100%;
+    padding: 0 4px;
+  }
+
+  .scenario-card {
+    padding: 12px;
+  }
+
+  .briefing-box {
+    min-height: 80px;
+    padding: 10px;
+  }
+
+  .briefing-text {
+    font-size: 7px;
+    line-height: 1.8;
+  }
 
   .intro-stats {
     flex-direction: column;
     gap: 4px;
   }
 
+  .start-btn, .restart-btn {
+    padding: 12px 24px;
+    font-size: 10px;
+    width: 100%;
+  }
+
+  /* Status bar compact */
+  .status-bar {
+    padding: 6px 10px;
+    gap: 4px;
+  }
+
+  .status-label {
+    font-size: 5px;
+  }
+
+  .status-value {
+    font-size: 7px;
+  }
+
+  .move-count {
+    font-size: 11px;
+  }
+
+  /* Harness bar stacked */
   .harness-bar {
     flex-direction: column;
     align-items: flex-start;
+    padding: 6px 10px;
+    gap: 4px;
+  }
+
+  /* Map scaling for mobile */
+  .facility-map-wrapper {
+    zoom: 0.55;
+  }
+
+  /* Room panel */
+  .room-panel {
+    padding: 8px;
+  }
+
+  .room-description {
+    font-size: 7px;
+    line-height: 1.8;
+  }
+
+  .harness-desc {
+    font-size: 5px;
+    line-height: 1.6;
+    padding: 6px 8px;
+  }
+
+  /* Action log constrained */
+  .action-log {
+    max-height: 160px;
+  }
+
+  .log-entry {
+    font-size: 6px;
+    padding: 6px;
+  }
+
+  /* Touch-friendly action buttons */
+  .action-btn {
+    min-height: 44px;
+    padding: 10px 12px;
+    font-size: 7px;
+    gap: 6px;
+  }
+
+  .action-panel {
+    max-height: none;
+  }
+
+  .action-list {
+    gap: 6px;
+  }
+
+  /* Victory screen */
+  .victory-screen {
+    padding: 12px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 400px) {
+  .facility-map-wrapper {
+    zoom: 0.45;
+  }
+
+  .title-line { font-size: 12px; }
+
+  .status-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .status-center, .status-right {
+    text-align: left;
+  }
+
+  .action-btn {
+    font-size: 6px;
+  }
+}
+
+/* Ensure tap targets on touch devices */
+@media (pointer: coarse) {
+  .action-btn {
+    min-height: 44px;
+  }
+
+  .start-btn, .restart-btn {
+    min-height: 48px;
+  }
+
+  .harness-tool {
+    padding: 4px 6px;
+    font-size: 6px;
   }
 }

@@ -13,7 +13,7 @@ As an AI maintenance agent, your mission is to navigate the facility, gather int
 Each area runs a different TOOL HARNESS — a set of constraints that determines which actions you can perform. Choose your moves wisely.
 
 Think before you act. Observe before you move. Every action counts.`,
-  optimalMoves: 11,
+  optimalMoves: 13,
 
   // Harness definitions — each room constrains available tool categories
   harnesses: {
