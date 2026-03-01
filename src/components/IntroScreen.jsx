@@ -24,8 +24,16 @@ export default function IntroScreen({ scenario, onStart }) {
 
   const briefingDone = typedText.length >= scenario.briefing.length;
 
+  const handleSkip = () => {
+    if (!briefingDone) {
+      setShowBriefing(true);
+      setTitleVisible(true);
+      setTypedText(scenario.briefing);
+    }
+  };
+
   return (
-    <div className="intro-screen">
+    <div className="intro-screen" onClick={handleSkip}>
       <div className="intro-content">
         <div className="intro-top-label">{'< TOOL-CALL TACTICS >'}</div>
 
