@@ -1,31 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function IntroScreen({ scenario, onStart }) {
   const [showBriefing, setShowBriefing] = useState(false);
   const [typedText, setTypedText] = useState('');
   const [titleVisible, setTitleVisible] = useState(false);
+  const [skipped, setSkipped] = useState(false);
+  const intervalRef = useRef(null);
 
   useEffect(() => {
-    setTimeout(() => setTitleVisible(true), 300);
-    setTimeout(() => setShowBriefing(true), 1000);
+    const t1 = setTimeout(() => setTitleVisible(true), 300);
+    const t2 = setTimeout(() => setShowBriefing(true), 1000);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
 
   useEffect(() => {
-    if (!showBriefing) return;
+    if (!showBriefing || skipped) return;
     const text = scenario.briefing;
     let i = 0;
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       setTypedText(text.slice(0, i + 1));
       i++;
-      if (i >= text.length) clearInterval(interval);
+      if (i >= text.length) clearInterval(intervalRef.current);
     }, 18);
-    return () => clearInterval(interval);
-  }, [showBriefing, scenario.briefing]);
+    return () => clearInterval(intervalRef.current);
+  }, [showBriefing, skipped, scenario.briefing]);
 
   const briefingDone = typedText.length >= scenario.briefing.length;
 
   const handleSkip = () => {
     if (!briefingDone) {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      setSkipped(true);
       setShowBriefing(true);
       setTitleVisible(true);
       setTypedText(scenario.briefing);
