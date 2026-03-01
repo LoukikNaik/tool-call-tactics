@@ -289,6 +289,11 @@ body {
   font-size: 14px;
 }
 
+.timer-value {
+  color: var(--info);
+  font-size: 10px;
+}
+
 /* Harness + Inventory Bar */
 .harness-bar {
   display: flex;

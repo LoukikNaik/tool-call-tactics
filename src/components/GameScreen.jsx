@@ -2,14 +2,30 @@ import { useRef, useEffect, useState } from 'react';
 import { getAvailableActions, scenario } from '../game/scenario';
 import FacilityMap from './FacilityMap';
 
+function formatTime(ms) {
+  const totalSecs = Math.floor(ms / 1000);
+  const mins = Math.floor(totalSecs / 60);
+  const secs = totalSecs % 60;
+  return `${mins}:${String(secs).padStart(2, '0')}`;
+}
+
 const MOVE_ACTIONS = ['move_control', 'move_server', 'move_corridor', 'move_corridor_from_server'];
 
-export default function GameScreen({ state, onAction }) {
+export default function GameScreen({ state, onAction, timerStart }) {
   const logEndRef = useRef(null);
   const mapRef = useRef(null);
   const [animatingAction, setAnimatingAction] = useState(null);
   const [isMoving, setIsMoving] = useState(false);
+  const [elapsed, setElapsed] = useState(0);
   const { actions, locked } = getAvailableActions(state);
+
+  useEffect(() => {
+    if (!timerStart?.current) return;
+    const id = setInterval(() => {
+      setElapsed(Date.now() - timerStart.current);
+    }, 1000);
+    return () => clearInterval(id);
+  }, [timerStart, state.moveCount]);
   const room = scenario.rooms[state.currentRoom];
   const harness = scenario.harnesses[state.currentRoom];
 
@@ -52,6 +68,12 @@ export default function GameScreen({ state, onAction }) {
         <div className="status-right">
           <span className="status-label">MOVES</span>
           <span className="status-value move-count">{state.moveCount}</span>
+          {timerStart?.current && (
+            <>
+              <span className="status-label" style={{ marginTop: 4 }}>TIME</span>
+              <span className="status-value timer-value">{formatTime(elapsed)}</span>
+            </>
+          )}
         </div>
       </div>
 

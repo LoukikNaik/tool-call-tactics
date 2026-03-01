@@ -1,7 +1,14 @@
 import { useState, useEffect } from 'react';
 import { calculateScore, scenario } from '../game/scenario';
 
-export default function VictoryScreen({ state, onRestart }) {
+function formatTime(ms) {
+  const totalSecs = Math.floor(ms / 1000);
+  const mins = Math.floor(totalSecs / 60);
+  const secs = totalSecs % 60;
+  return `${mins}:${String(secs).padStart(2, '0')}`;
+}
+
+export default function VictoryScreen({ state, onRestart, elapsedTime }) {
   const [showStats, setShowStats] = useState(false);
   const [showLog, setShowLog] = useState(false);
   const score = calculateScore(state.moveCount, scenario.optimalMoves);
@@ -54,6 +61,10 @@ export default function VictoryScreen({ state, onRestart }) {
             <div className="stat-row">
               <span className="stat-label">EFFICIENCY</span>
               <span className="stat-value">{score.efficiency}%</span>
+            </div>
+            <div className="stat-row">
+              <span className="stat-label">TIME</span>
+              <span className="stat-value">{formatTime(elapsedTime)}</span>
             </div>
 
             <div className="efficiency-bar">
